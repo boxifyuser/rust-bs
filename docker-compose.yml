@@ -1,16 +1,16 @@
 services:
   rust-bs:
     build:
-      # Clona o repo no build (evita erro "Dockerfile not found" no Easypanel)
       context: https://github.com/boxifyuser/rust-bs.git#main
       dockerfile: Dockerfile
     restart: unless-stopped
-    ports:
-      - "28015:28015/tcp"
-      - "28015:28015/udp"
-      - "28016:28016/tcp"
-      - "28017:28017/udp"
-      - "28082:28082/tcp"
+    # Portas expostas internamente — mapeie no Easypanel (aba Ports), nao aqui
+    expose:
+      - "28015/tcp"
+      - "28015/udp"
+      - "28016/tcp"
+      - "28017/udp"
+      - "28082/tcp"
     volumes:
       - rust_data:/home/steam/rust/server
     environment:

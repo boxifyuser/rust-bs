@@ -67,22 +67,38 @@ Recomendado para servidores de jogo com várias portas e volume persistente.
 
 A primeira subida pode levar **15–30 minutos** (download do Rust via SteamCMD + Carbon).
 
+### Aviso "ports might cause conflicts"
+
+O Easypanel **nao quer** `ports` no `docker-compose.yml`. As portas do Rust devem ser mapeadas no **painel**, nao no arquivo.
+
+No serviço **rust-bs**, procure a aba **Ports** (ou equivalente) e adicione:
+
+| Publicada (host) | Alvo (container) | Protocolo |
+|------------------|------------------|-----------|
+| 28015 | 28015 | TCP |
+| 28015 | 28015 | UDP |
+| 28016 | 28016 | TCP |
+| 28017 | 28017 | UDP |
+| 28082 | 28082 | TCP |
+
+Se o serviço Compose **nao tiver** aba Ports, crie um serviço **App** em vez de Compose (veja secao abaixo) — ele tem suporte nativo a portas TCP/UDP.
+
 ### Erro "Dockerfile: no such file or directory"
 
 1. Confirme **Build Path = `/`** na aba Source do serviço Compose
 2. Faça **Deploy** novamente (o compose agora clona o GitHub no build)
 3. Se persistir, use serviço **App** em vez de Compose (veja abaixo)
 
-## Alternativa: App com Dockerfile
+## Alternativa: App com Dockerfile (recomendado para Rust)
 
-Se preferir serviço **App** em vez de Compose:
+Se o Compose der problemas com portas ou build, use serviço **App**:
 
 1. **Add Service** → **App**
-2. Source: GitHub → `boxifyuser/rust-bs`
-3. Build: **Dockerfile** (detectado automaticamente)
-4. Em **Ports**, mapeie: `28015`, `28016`, `28017`, `28082` (TCP e UDP no 28015)
-5. Adicione volume persistente: `/home/steam/rust/server`
-6. Configure as variáveis de ambiente
+2. Source: GitHub → `boxifyuser/rust-bs`, branch `main`, Build Path `/`
+3. Build: **Dockerfile**
+4. Aba **Ports** — adicione os mapeamentos da tabela acima (TCP + UDP no 28015)
+5. Volume persistente: `/home/steam/rust/server`
+6. Environment: mesmas variaveis da secao 3
 7. **Deploy**
 
 Documentação Easypanel: [Builders](https://easypanel.io/docs/builders) · [Compose Service](https://easypanel.io/changelog/1-46-0-1)
