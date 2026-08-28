@@ -6,6 +6,7 @@ STEAMCMD="${STEAMCMD:-/home/steam/steamcmd/steamcmd.sh}"
 OVERLAY="/home/steam/overlay"
 IDENTITY="${SERVER_IDENTITY:-rst}"
 SERVER_DIR="${RUST_HOME}/server/${IDENTITY}"
+STEAM_PLUGINS="${RUST_HOME}/RustDedicated_Data/Plugins/x86_64"
 
 # Volume Docker costuma ser criado como root — corrige antes de continuar
 if [ "$(id -u)" = "0" ]; then
@@ -51,10 +52,16 @@ if [ -d "${OVERLAY}/server/rst/cfg" ]; then
   cp -rf "${OVERLAY}/server/rst/cfg/"* "${SERVER_DIR}/cfg/"
 fi
 
+# Steam libs no Linux (evita hang apos SteamAPI_Init)
+if [ -f "${STEAM_PLUGINS}/steamclient.so" ]; then
+  cp -fn "${STEAM_PLUGINS}/steamclient.so" "${RUST_HOME}/" 2>/dev/null || true
+fi
+
 export DOORSTOP_ENABLED=1
 export DOORSTOP_TARGET_ASSEMBLY="${RUST_HOME}/carbon/managed/Carbon.Preloader.dll"
-export LD_LIBRARY_PATH="${RUST_HOME}/RustDedicated_Data/Plugins/x86_64:${RUST_HOME}:${LD_LIBRARY_PATH:-}"
+export LD_LIBRARY_PATH="${STEAM_PLUGINS}:${RUST_HOME}:${LD_LIBRARY_PATH:-}"
 export LD_PRELOAD="${RUST_HOME}/libdoorstop.so"
+export MALLOC_ARENA_MAX=2
 
 RCON_PASSWORD="${RCON_PASSWORD:?Defina RCON_PASSWORD}"
 SERVER_HOSTNAME="${SERVER_HOSTNAME:-BICHO SOLTO BRASIL}"
@@ -68,9 +75,30 @@ APP_PORT="${APP_PORT:-28082}"
 
 cd "${RUST_HOME}"
 
+heartbeat() {
+  while true; do
+    sleep 120
+    if pgrep -x RustDedicated >/dev/null 2>&1; then
+      CPU="$(ps -o %cpu= -p "$(pgrep -x RustDedicated | head -1)" 2>/dev/null | tr -d ' ')"
+      MEM="$(ps -o %mem= -p "$(pgrep -x RustDedicated | head -1)" 2>/dev/null | tr -d ' ')"
+      echo "[rust-bs] $(date -u +%H:%M:%S) RustDedicated ativo (CPU ${CPU:-?}% MEM ${MEM:-?}%) — gerando mapa, aguarde..."
+      if [ -f "${SERVER_DIR}/server.log" ]; then
+        tail -n 2 "${SERVER_DIR}/server.log" 2>/dev/null | sed 's/^/[rust-bs]   /' || true
+      fi
+    else
+      echo "[rust-bs] ERRO: RustDedicated parou inesperadamente."
+      return 1
+    fi
+  done
+}
+
 echo "[rust-bs] Iniciando servidor..."
-exec ./RustDedicated -batchmode -nographics -load -silent-crashes \
-  -logfile /dev/stdout \
+heartbeat &
+HEARTBEAT_PID=$!
+
+set +e
+./RustDedicated -batchmode -nographics -load \
+  -logfile "${SERVER_DIR}/server.log" \
   +server.ip 0.0.0.0 \
   +server.port "${SERVER_PORT}" \
   +server.queryport "${QUERY_PORT}" \
@@ -80,6 +108,7 @@ exec ./RustDedicated -batchmode -nographics -load -silent-crashes \
   +rcon.web 1 \
   +app.port "${APP_PORT}" \
   +server.identity "${IDENTITY}" \
+  +server.secure 0 \
   +server.gamemode Vanilla \
   +server.level "Procedural Map" \
   +server.seed "${SERVER_SEED}" \
@@ -87,4 +116,17 @@ exec ./RustDedicated -batchmode -nographics -load -silent-crashes \
   +server.maxplayers "${MAX_PLAYERS}" \
   +server.hostname "${SERVER_HOSTNAME}" \
   +bradley.enabled 0 \
-  +events.set_event_enabled bradley_road false
+  +events.set_event_enabled bradley_road false &
+RUST_PID=$!
+set -e
+
+# Repassa logs do arquivo para o stdout do container (Easypanel)
+tail -n 0 -F "${SERVER_DIR}/server.log" &
+TAIL_PID=$!
+
+wait "${RUST_PID}"
+EXIT_CODE=$?
+
+kill "${HEARTBEAT_PID}" "${TAIL_PID}" 2>/dev/null || true
+echo "[rust-bs] RustDedicated encerrou com codigo ${EXIT_CODE}"
+exit "${EXIT_CODE}"
