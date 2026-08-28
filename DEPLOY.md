@@ -42,15 +42,25 @@ Recomendado para servidores de jogo com várias portas e volume persistente.
    - Repository: `boxifyuser/rust-bs`
    - Branch: `main`
    - Compose path: `docker-compose.yml`
-4. **Environment** — adicione as variáveis (copie de `.env.example`):
+4. **Environment** — aba do serviço Compose, adicione **uma variável por linha** (Key / Value):
 
-```
-RCON_PASSWORD=sua-senha-forte
-SERVER_HOSTNAME=BICHO SOLTO BRASIL | SOLO
-SERVER_SEED=836891193
-WORLD_SIZE=1800
-MAX_PLAYERS=200
-```
+| Key | Value (exemplo) |
+|-----|-----------------|
+| `RCON_PASSWORD` | `sua-senha-forte` |
+| `SERVER_HOSTNAME` | `BICHO SOLTO BRASIL \| SOLO` |
+| `SERVER_SEED` | `836891193` |
+| `WORLD_SIZE` | `1800` |
+| `MAX_PLAYERS` | `200` |
+| `SERVER_PORT` | `28015` |
+| `RCON_PORT` | `28016` |
+| `QUERY_PORT` | `28017` |
+| `APP_PORT` | `28082` |
+| `SERVER_IDENTITY` | `rst` |
+| `RUST_CARBON_ENABLED` | `1` |
+
+> **Importante:** o Easypanel **não** lê `.env.local` nem arquivos `.env` do seu PC.
+> As variáveis precisam estar na aba **Environment** do serviço no painel.
+> `RCON_PASSWORD` é **obrigatória** — sem ela o deploy avisa e o servidor não inicia.
 
 5. **Deploy**
 
