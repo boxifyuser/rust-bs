@@ -1,0 +1,12 @@
+{
+  "OrganizeText": "ORGANIZAR",
+  "LootAllText": "PEGAR TUDO",
+  "ButtonColor": "0.25 0.45 0.22 0.98",
+  "LootButtonColor": "0.40 0.48 0.22 0.98",
+  "TextColor": "1 1 1 1",
+  "TextSize": 12,
+  "BarAnchorMin": "0.505 0.548",
+  "BarAnchorMax": "0.705 0.600",
+  "StackOnly": false,
+  "DebugLog": false
+}

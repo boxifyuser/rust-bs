@@ -1,0 +1,11 @@
+{
+  "Image URL": "https://i.ibb.co/1JQp16yQ/Gemini-Generated-Image-rtmpybrtmpybrtmp.png",
+  "Fade-in duration": 0.3,
+  "Fade-out duration": 0.4,
+  "Delay after joining to create image": 1.0,
+  "Delay after creating image to start fade out": 2.5,
+  "Anchor min (left bottom coordinate)": "0.2 0.25",
+  "Anchor min (right top coordinate)": "0.8 0.75",
+  "Image transparency": 1.0,
+  "Show multiple times?": true
+}

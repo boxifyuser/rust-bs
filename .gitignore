@@ -1,0 +1,45 @@
+# Binarios e runtime do Rust/Unity
+*.exe
+*.dll
+*.so
+*.dylib
+RustDedicated_Data/
+MonoBleedingEdge/
+D3D12/
+Bundles/
+SteamCMD/
+steamapps/
+appcache/
+userdata/
+config/
+HarmonyMods/
+
+# Logs e dados de execucao
+logs/
+harmony_log.txt
+server/rst/*.log
+server/rst/Log.EAC.txt
+server/rst/companion.id
+server/rst/command_history/
+server/rst/*.db
+server/rst/*.db-wal
+server/rst/*.sav
+server/rst/*.sav.*
+server/rst/*.dat
+server/rst/*.part
+server/rst/maps/
+server/rst/www/
+carbon/logs/
+carbon/data/
+carbon/modules/**/data.db
+carbon/modules/**/data.json
+carbon/config.webpanel.json
+
+# Mapas e assets grandes
+map/
+*.map
+
+# Arquivos temporarios do sistema
+Thumbs.db
+Desktop.ini
+.DS_Store

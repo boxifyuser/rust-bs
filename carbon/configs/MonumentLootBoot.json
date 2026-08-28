@@ -1,0 +1,6 @@
+{
+  "ApplySpawnSettingsOnBoot": true,
+  "ForceFillOnlyOnWipe": false,
+  "ForceFillDelaySecondsOnWipe": 120.0,
+  "LogActions": true
+}

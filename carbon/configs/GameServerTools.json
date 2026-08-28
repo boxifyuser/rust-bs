@@ -1,0 +1,75 @@
+{
+  "AntiFlood": {
+    "ChatCooldownSeconds": 1.5,
+    "ChatEnabled": false,
+    "CommandCooldownSeconds": 1.0,
+    "CommandEnabled": false
+  },
+  "Api": {
+    "BanCheckEnabled": false,
+    "VpnCheckEnabled": false
+  },
+  "General": {
+    "APIKEY": "/MYliD6Fa18hgwukxiu1OsgG8wmtrfNTuhPVZMQwtds=",
+    "DebugLoggingEnabled": false,
+    "DisableBanCtrl": false,
+    "DisplayMessageOnClaimRewards": true,
+    "OxideGroupNameForLinked": "DiscordLinked",
+    "OxideGroupNameForNitro": "NitroBoosted"
+  },
+  "HighPing": {
+    "CheckIntervalSeconds": 60,
+    "Enabled": false,
+    "MaxPing": 350
+  },
+  "Radar": {
+    "AutoOffSeconds": 120.0,
+    "DrawBudgetPerTick": 800,
+    "Enabled": false,
+    "HighlightGstTraps": true,
+    "IntervalSeconds": 0.5,
+    "LookLineLength": 15,
+    "MaxDistance": 200,
+    "MaxDropDraws": 24,
+    "MaxEntityDraws": 220,
+    "MaxPlayerDraws": 60,
+    "MaxSleeperDraws": 30,
+    "MaxUsers": 8,
+    "ProjectileCap": 400,
+    "ProjectileLineLength": 100,
+    "ProjectileSeconds": 1.25,
+    "ShowWorldEntities": true,
+    "ToggleCooldownSeconds": 2.0
+  },
+  "StashTraps": {
+    "BanDelaySeconds": 10,
+    "BanReason": "Cheat Detected (ESP stash trap)",
+    "DecoyBagSpawnChance": 55,
+    "DecoyLoot": true,
+    "DestroyRevealedAfterMinutes": 5,
+    "Enabled": false,
+    "EnsureIntervalSeconds": 120,
+    "IgnoreClanWindowEnabled": true,
+    "IgnoreClanWindowSeconds": 25,
+    "IgnoreTeamWindowEnabled": true,
+    "IgnoreTeamWindowSeconds": 20,
+    "LocalAutoBan": true,
+    "MaxActive": 200,
+    "MinWaterClearance": 0.75,
+    "OwnerSteamId": "",
+    "PlacementBuildingRadius": 20,
+    "PlacementMonumentRadius": 35,
+    "ReplaceRevealedTrap": true,
+    "SpawnDecoyBags": true,
+    "ViolationThreshold": 3,
+    "ViolationWindowMinutes": 30
+  },
+  "WatchDog": {
+    "Enabled": false,
+    "BatchIntervalSeconds": 5,
+    "BatchMaxSize": 200,
+    "BufferCap": 2000,
+    "ChunkMaxRetries": 12,
+    "RetryBaseDelaySeconds": 2
+  }
+}

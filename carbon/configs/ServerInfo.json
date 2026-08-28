@@ -1,0 +1,105 @@
+{
+  "settings": {
+    "Tabs": [
+      {
+        "ButtonText": "Bem-vindo",
+        "HeaderText": "[BR] BICHO SOLTO | SOLO | X1",
+        "Pages": [
+          {
+            "TextLines": [
+              "<size=18><color=#55efc4>Bem-vindo ao BICHO SOLTO!</color></size>",
+              "",
+              "Servidor brasileiro <color=#ffeaa7>Solo Only</color> - X1 - mapa compacto.",
+              "",
+              "<color=#74b9ff>Regras principais:</color>",
+              "- Solo only: sem times e sem clas",
+              "- Sem cheat, exploit ou macro",
+              "- Respeito no chat",
+              "- X1 competitivo e progressao vanilla",
+              "",
+              "Discord: <color=#a29bfe>https://discord.gg/q95rCd3DP</color>",
+              "",
+              "Digite <color=#ff7675>/info</color> para reabrir este painel.",
+              "Clique em Fechar para jogar."
+            ],
+            "ImageSettings": []
+          }
+        ],
+        "TabButtonAnchor": 4,
+        "TabButtonFontSize": 16,
+        "HeaderAnchor": 0,
+        "HeaderFontSize": 28,
+        "TextFontSize": 16,
+        "TextAnchor": 3,
+        "OxideGroup": ""
+      },
+      {
+        "ButtonText": "Comandos",
+        "HeaderText": "Comandos uteis",
+        "Pages": [
+          {
+            "TextLines": [
+              "<color=#55efc4>/info</color> - este painel",
+              "<color=#55efc4>/players</color> - jogadores online",
+              "<color=#55efc4>/sleepers</color> - sleepers",
+              "<color=#55efc4>/link</color> - vincular Discord (GST)",
+              "<color=#55efc4>/voteday</color> - votar para pular a noite",
+              "",
+              "Bom wipe e boa sorte - o bicho fica solto."
+            ],
+            "ImageSettings": []
+          }
+        ],
+        "TabButtonAnchor": 4,
+        "TabButtonFontSize": 16,
+        "HeaderAnchor": 0,
+        "HeaderFontSize": 28,
+        "TextFontSize": 16,
+        "TextAnchor": 3,
+        "OxideGroup": ""
+      }
+    ],
+    "ShowInfoOnPlayerInit": true,
+    "ShowInfoOnlyOncePerRuntime": false,
+    "TabToOpenByDefault": 0,
+    "Position": {
+      "MinX": 0.15,
+      "MaxX": 0.85,
+      "MinY": 0.2,
+      "MaxY": 0.85
+    },
+    "BackgroundImage": {
+      "Enabled": false,
+      "Position": {
+        "MinX": 0.0,
+        "MaxX": 1.0,
+        "MinY": 0.0,
+        "MaxY": 1.0
+      },
+      "Url": "http://7-themes.com/data_images/out/35/6889756-black-backgrounds.jpg",
+      "TransparencyInPercent": 100
+    },
+    "ActiveButtonColor": "#00FFFFFF",
+    "InactiveButtonColor": "#808080FF",
+    "CloseButtonColor": "#808080FF",
+    "CloseButtonText": "Fechar",
+    "NextPageButtonColor": "#808080FF",
+    "NextPageText": "Proxima",
+    "PrevPageButtonColor": "#808080FF",
+    "PrevPageText": "Anterior",
+    "BackgroundColor": "#000000F0",
+    "HelpButton": {
+      "IsEnabled": false,
+      "Text": "Help",
+      "Position": {
+        "MinX": 0.0,
+        "MaxX": 0.05,
+        "MinY": 0.09,
+        "MaxY": 0.14
+      },
+      "Color": "#808080FF",
+      "FontSize": 18
+    },
+    "UpgradedConfig": true
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "Global settings": {
+    "Default enabled": true,
+    "Default UI style (center, lite, right, custom)": "right",
+    "Loot all delay in seconds (0 to disable)": 0,
+    "Enable loot all on the sleepers": false,
+    "Auto loot all enabled by default": false,
+    "Default enabled container types": {
+      "Belt": false,
+      "Main": true,
+      "Wear": false
+    },
+    "Chat steamID icon": 0,
+    "Chat command": [
+      "qs",
+      "quicksort"
+    ],
+    "Excluded containers": [
+      "assets/prefabs/deployable/single shot trap/guntrap.deployed.prefab",
+      "assets/prefabs/npc/autoturret/autoturret_deployed.prefab",
+      "assets/prefabs/npc/flame turret/flameturret.deployed.prefab",
+      "assets/prefabs/npc/sam_site_turret/sam_site_turret_deployed.prefab",
+      "assets/prefabs/npc/sam_site_turret/sam_static.prefab"
+    ]
+  },
+  "Custom UI Settings": {
+    "AnchorsMin": "0.5 1.0",
+    "AnchorsMax": "0.5 1.0",
+    "OffsetsMin": "192 -137",
+    "OffsetsMax": "573 0",
+    "Color": "0.5 0.5 0.5 0.33",
+    "ButtonsColor": "0.75 0.43 0.18 0.8",
+    "LootAllColor": "0.41 0.50 0.25 0.8",
+    "TextColor": "0.77 0.92 0.67 0.8",
+    "TextSize": 16,
+    "CategoriesTextSize": 14
+  }
+}

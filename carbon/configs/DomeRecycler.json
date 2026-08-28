@@ -1,0 +1,15 @@
+{
+  "UseFixedPosition": false,
+  "PosX": 273.42984,
+  "PosY": 17.4959717,
+  "PosZ": 302.179382,
+  "Yaw": 243.529526,
+  "OffsetX": 0.0,
+  "OffsetY": 0.2,
+  "OffsetZ": 0.0,
+  "CleanupRadius": 80.0,
+  "BootDelaySeconds": 5.0,
+  "WipeDelaySeconds": 40.0,
+  "LogActions": true,
+  "RecycleEfficiency": 0.4
+}
