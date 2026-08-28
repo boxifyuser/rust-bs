@@ -9,6 +9,7 @@ RUN dpkg --add-architecture i386 \
     unzip \
     gosu \
     locales \
+    procps \
     lib32gcc-s1 \
     libsdl2-2.0-0 \
     libfontconfig1 \
