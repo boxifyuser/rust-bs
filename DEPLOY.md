@@ -41,7 +41,8 @@ Recomendado para servidores de jogo com várias portas e volume persistente.
 3. Source: **GitHub**
    - Repository: `boxifyuser/rust-bs`
    - Branch: `main`
-   - Compose path: `docker-compose.yml`
+   - **Build Path:** `/` (raiz do repositório — obrigatório)
+   - **Docker Compose File:** `docker-compose.yml`
 4. **Environment** — aba do serviço Compose, adicione **uma variável por linha** (Key / Value):
 
 | Key | Value (exemplo) |
@@ -65,6 +66,12 @@ Recomendado para servidores de jogo com várias portas e volume persistente.
 5. **Deploy**
 
 A primeira subida pode levar **15–30 minutos** (download do Rust via SteamCMD + Carbon).
+
+### Erro "Dockerfile: no such file or directory"
+
+1. Confirme **Build Path = `/`** na aba Source do serviço Compose
+2. Faça **Deploy** novamente (o compose agora clona o GitHub no build)
+3. Se persistir, use serviço **App** em vez de Compose (veja abaixo)
 
 ## Alternativa: App com Dockerfile
 

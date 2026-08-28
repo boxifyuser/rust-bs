@@ -1,7 +1,8 @@
 services:
   rust-bs:
     build:
-      context: .
+      # Clona o repo no build (evita erro "Dockerfile not found" no Easypanel)
+      context: https://github.com/boxifyuser/rust-bs.git#main
       dockerfile: Dockerfile
     restart: unless-stopped
     ports:
@@ -13,7 +14,6 @@ services:
     volumes:
       - rust_data:/home/steam/rust/server
     environment:
-      # Formato lista: Easypanel injeta da aba Environment (sem ${} no compose)
       - RCON_PASSWORD
       - SERVER_HOSTNAME
       - SERVER_SEED
