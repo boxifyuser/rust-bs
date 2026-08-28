@@ -62,9 +62,8 @@ Recomendado para servidores de jogo com várias portas e volume persistente.
 | `STEAM_GSLT` | token gerado na Steam (veja secao abaixo) |
 
 > **Importante:** o Easypanel **não** lê `.env.local` nem arquivos `.env` do seu PC.
-> As variáveis precisam estar na aba **Environment** do serviço no painel.
-> Ative **"Criar arquivo .env"** e cole as variáveis no formato `CHAVE=valor` (sem aspas).
-> O `docker-compose.yml` lê esse `.env` automaticamente.
+> As variáveis precisam estar na aba **Environment** do serviço no painel (formato `CHAVE=valor`, uma por linha).
+> Clique em **Salvar** antes de **Implantar**. Não é necessário ativar "Criar arquivo .env".
 > `RCON_PASSWORD` é **obrigatória** — sem ela o deploy avisa e o servidor não inicia.
 
 5. **Deploy**

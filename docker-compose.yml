@@ -13,9 +13,7 @@ services:
       - "28082:28082/tcp"
     volumes:
       - rust_data:/home/steam/rust
-    # Easypanel: com "Criar arquivo .env" ligado, as variaveis ficam neste arquivo
-    env_file:
-      - .env
+    # Easypanel injeta as variaveis da aba Environment no compose (${VAR})
     environment:
       RCON_PASSWORD: ${RCON_PASSWORD:?Defina RCON_PASSWORD}
       SERVER_HOSTNAME: ${SERVER_HOSTNAME:-BICHO SOLTO BRASIL | SOLO}
