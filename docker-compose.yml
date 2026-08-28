@@ -13,21 +13,20 @@ services:
       - "28082:28082/tcp"
     volumes:
       - rust_data:/home/steam/rust
-    # Easypanel: variaveis da aba Environment sao repassadas pelo nome (sem ${})
     environment:
-      - RCON_PASSWORD
-      - SERVER_HOSTNAME
-      - SERVER_SEED
-      - WORLD_SIZE
-      - MAX_PLAYERS
-      - SERVER_PORT
-      - RCON_PORT
-      - QUERY_PORT
-      - APP_PORT
-      - SERVER_IDENTITY
-      - RUST_CARBON_ENABLED
-      - SERVER_PUBLIC_IP
-      - STEAM_GSLT
+      RCON_PASSWORD: "19541954"
+      SERVER_HOSTNAME: "BICHO SOLTO BRASIL | SOLO"
+      SERVER_SEED: "836891193"
+      WORLD_SIZE: "1800"
+      MAX_PLAYERS: "200"
+      SERVER_PORT: "28015"
+      RCON_PORT: "28016"
+      QUERY_PORT: "28017"
+      APP_PORT: "28082"
+      SERVER_IDENTITY: "rst"
+      RUST_CARBON_ENABLED: "1"
+      SERVER_PUBLIC_IP: "168.231.91.245"
+      STEAM_GSLT: "C69D8AFA1A2DB3967B6040DDC576EA9F"
 
 volumes:
   rust_data:

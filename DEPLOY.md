@@ -43,30 +43,7 @@ Recomendado para servidores de jogo com várias portas e volume persistente.
    - Branch: `main`
    - **Build Path:** `/` (raiz do repositório — obrigatório)
    - **Docker Compose File:** `docker-compose.yml`
-4. **Environment** — aba do serviço Compose, adicione **uma variável por linha** (Key / Value):
-
-| Key | Value (exemplo) |
-|-----|-----------------|
-| `RCON_PASSWORD` | `sua-senha-forte` |
-| `SERVER_HOSTNAME` | `BICHO SOLTO BRASIL \| SOLO` |
-| `SERVER_SEED` | `836891193` |
-| `WORLD_SIZE` | `1800` |
-| `MAX_PLAYERS` | `200` |
-| `SERVER_PORT` | `28015` |
-| `RCON_PORT` | `28016` |
-| `QUERY_PORT` | `28017` |
-| `APP_PORT` | `28082` |
-| `SERVER_IDENTITY` | `rst` |
-| `RUST_CARBON_ENABLED` | `1` |
-| `SERVER_PUBLIC_IP` | `168.231.91.245` |
-| `STEAM_GSLT` | token gerado na Steam (veja secao abaixo) |
-
-> **Importante:** o Easypanel **não** lê `.env.local` do seu PC.
-> Na aba **Environment**, adicione **cada variável separadamente** (campo Key + Value), não só um bloco de texto.
-> Exemplo: Key `RCON_PASSWORD` → Value `sua-senha`. Repita para `STEAM_GSLT`, `SERVER_PUBLIC_IP`, etc.
-> Clique em **Salvar** antes de **Implantar**.
-> `RCON_PASSWORD` é **obrigatória** — sem ela o deploy avisa e o servidor não inicia.
-
+4. **Environment** — nao e necessario. Toda a configuracao esta em `docker-compose.yml`.
 5. **Deploy**
 
 A primeira subida pode levar **15–30 minutos** (download do Rust via SteamCMD + Carbon).
@@ -102,7 +79,7 @@ Se o Compose der problemas com portas ou build, use serviço **App**:
 3. Build: **Dockerfile**
 4. Aba **Ports** — adicione os mapeamentos da tabela acima (TCP + UDP no 28015)
 5. Volume persistente: `/home/steam/rust/server`
-6. Environment: mesmas variaveis da secao 3
+6. Environment: mesmas variaveis da secao `environment` em `docker-compose.yml`
 7. **Deploy**
 
 Documentação Easypanel: [Builders](https://easypanel.io/docs/builders) · [Compose Service](https://easypanel.io/changelog/1-46-0-1)
@@ -111,16 +88,17 @@ Documentação Easypanel: [Builders](https://easypanel.io/docs/builders) · [Com
 
 Para o jogo **encontrar o servidor sozinho** (aba Comunidade / Modded), configure:
 
-### Token Steam (GSLT) — obrigatorio para listagem
+### Token Steam (GSLT)
 
-1. Acesse https://steamcommunity.com/dev/managegameservers (conta Steam com **Rust** na biblioteca)
-2. **Create** → App ID: **252490** (jogo Rust, nao o dedicated 258550)
-3. Copie o token e cole no Easypanel como `STEAM_GSLT`
-4. **Um token por servidor** — nao reutilize em outro host ao mesmo tempo
+O token ja esta em `docker-compose.yml` (`STEAM_GSLT`). Para trocar, edite o arquivo e faca deploy.
+
+1. Gere em https://steamcommunity.com/dev/managegameservers (App ID **252490**)
+2. Atualize `STEAM_GSLT` em `docker-compose.yml`
+3. Commit + Deploy
 
 ### IP publico
 
-Defina `SERVER_PUBLIC_IP=168.231.91.245` no Easypanel. Sem isso, a Steam pode registrar o IP interno do Docker e o servidor nao aparece direito na lista nem nos favoritos.
+Definido em `docker-compose.yml` como `SERVER_PUBLIC_IP`.
 
 ### Onde procurar no jogo
 
