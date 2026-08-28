@@ -25,6 +25,8 @@ services:
       - APP_PORT
       - SERVER_IDENTITY
       - RUST_CARBON_ENABLED
+      - SERVER_PUBLIC_IP
+      - STEAM_GSLT
 
 volumes:
   rust_data:

@@ -58,6 +58,8 @@ Recomendado para servidores de jogo com várias portas e volume persistente.
 | `APP_PORT` | `28082` |
 | `SERVER_IDENTITY` | `rst` |
 | `RUST_CARBON_ENABLED` | `1` |
+| `SERVER_PUBLIC_IP` | `168.231.91.245` |
+| `STEAM_GSLT` | token gerado na Steam (veja secao abaixo) |
 
 > **Importante:** o Easypanel **não** lê `.env.local` nem arquivos `.env` do seu PC.
 > As variáveis precisam estar na aba **Environment** do serviço no painel.
@@ -103,15 +105,43 @@ Se o Compose der problemas com portas ou build, use serviço **App**:
 
 Documentação Easypanel: [Builders](https://easypanel.io/docs/builders) · [Compose Service](https://easypanel.io/changelog/1-46-0-1)
 
+## 3.1 Aparecer na lista do Rust (server browser)
+
+Para o jogo **encontrar o servidor sozinho** (aba Comunidade / Modded), configure:
+
+### Token Steam (GSLT) — obrigatorio para listagem
+
+1. Acesse https://steamcommunity.com/dev/managegameservers (conta Steam com **Rust** na biblioteca)
+2. **Create** → App ID: **252490** (jogo Rust, nao o dedicated 258550)
+3. Copie o token e cole no Easypanel como `STEAM_GSLT`
+4. **Um token por servidor** — nao reutilize em outro host ao mesmo tempo
+
+### IP publico
+
+Defina `SERVER_PUBLIC_IP=168.231.91.245` no Easypanel. Sem isso, a Steam pode registrar o IP interno do Docker e o servidor nao aparece direito na lista nem nos favoritos.
+
+### Onde procurar no jogo
+
+Como o servidor usa **Carbon** (plugins), ele aparece na aba **Modded**, nao em Vanilla:
+
+1. Menu → **Play Game** → **Rust**
+2. Aba **Modded** (ou **Community** com filtro Modded)
+3. Busque: **BICHO SOLTO**
+4. Pode levar **15–60 min** apos o deploy para indexar na Steam
+
+### Porta de query
+
+Confirme **UDP 28017** aberta no firewall Hostinger — sem ela o servidor nao responde ao browser do jogo.
+
 ## 4. Conectar no jogo
 
-No Rust, abra o console (F1) e digite:
+No Rust, abra o console (F1):
 
 ```
 client.connect 168.231.91.245:28015
 ```
 
-Ou adicione o IP na lista de servidores.
+Ou busque **BICHO SOLTO** na aba **Modded** do server browser (apos configurar GSLT).
 
 ## 5. Atualizar após mudanças no GitHub
 

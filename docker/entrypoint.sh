@@ -72,6 +72,22 @@ SERVER_PORT="${SERVER_PORT:-28015}"
 RCON_PORT="${RCON_PORT:-28016}"
 QUERY_PORT="${QUERY_PORT:-28017}"
 APP_PORT="${APP_PORT:-28082}"
+SERVER_PUBLIC_IP="${SERVER_PUBLIC_IP:-}"
+STEAM_GSLT="${STEAM_GSLT:-}"
+
+STEAM_ARGS=()
+if [ -n "${STEAM_GSLT}" ]; then
+  STEAM_ARGS+=( "+server.gametoken" "${STEAM_GSLT}" )
+  echo "[rust-bs] GSLT configurado — listagem na Steam ativa"
+else
+  echo "[rust-bs] AVISO: defina STEAM_GSLT para o servidor aparecer na lista do Rust"
+fi
+if [ -n "${SERVER_PUBLIC_IP}" ]; then
+  STEAM_ARGS+=( "+app.publicip" "${SERVER_PUBLIC_IP}" )
+  echo "[rust-bs] IP publico: ${SERVER_PUBLIC_IP}"
+else
+  echo "[rust-bs] AVISO: defina SERVER_PUBLIC_IP para favoritos e listagem corretos"
+fi
 
 cd "${RUST_HOME}"
 
@@ -116,7 +132,8 @@ set +e
   +server.maxplayers "${MAX_PLAYERS}" \
   +server.hostname "${SERVER_HOSTNAME}" \
   +bradley.enabled 0 \
-  +events.set_event_enabled bradley_road false &
+  +events.set_event_enabled bradley_road false \
+  "${STEAM_ARGS[@]}" &
 RUST_PID=$!
 set -e
 
