@@ -44,25 +44,24 @@ Recomendado para servidores de jogo com várias portas e volume persistente.
    - **Build Path:** `/` (raiz do repositório — obrigatório)
    - **Docker Compose File:** `docker-compose.yml`
 4. **Environment** — nao e necessario. Toda a configuracao esta em `docker-compose.yml`.
-5. **Deploy**
+5. **Ports** — aba Ports do servico, adicione **antes** do primeiro deploy:
 
-A primeira subida pode levar **15–30 minutos** (download do Rust via SteamCMD + Carbon).
-
-### Aviso "ports might cause conflicts"
-
-O Easypanel **nao quer** `ports` no `docker-compose.yml`. As portas do Rust devem ser mapeadas no **painel**, nao no arquivo.
-
-No serviço **rust-bs**, procure a aba **Ports** (ou equivalente) e adicione:
-
-| Publicada (host) | Alvo (container) | Protocolo |
-|------------------|------------------|-----------|
+| Publicada | Container | Protocolo |
+|-----------|-----------|-----------|
 | 28015 | 28015 | TCP |
 | 28015 | 28015 | UDP |
 | 28016 | 28016 | TCP |
 | 28017 | 28017 | UDP |
 | 28082 | 28082 | TCP |
 
-Se o serviço Compose **nao tiver** aba Ports, crie um serviço **App** em vez de Compose (veja secao abaixo) — ele tem suporte nativo a portas TCP/UDP.
+6. **Deploy**
+
+A primeira subida pode levar **15–30 minutos** (download do Rust via SteamCMD + Carbon).
+
+### Aviso "ports might cause conflicts"
+
+Esse aviso some ao remover `ports` do `docker-compose.yml` (ja removido no repo).
+As portas do Rust **devem** estar na aba **Ports** do Easypanel — sem isso o jogo nao conecta.
 
 ### Erro "Dockerfile: no such file or directory"
 

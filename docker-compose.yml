@@ -4,13 +4,7 @@ services:
       context: https://github.com/boxifyuser/rust-bs.git#main
       dockerfile: Dockerfile
     restart: unless-stopped
-    # Obrigatorio para servidor de jogo — ignore o aviso do Easypanel sobre ports
-    ports:
-      - "28015:28015/tcp"
-      - "28015:28015/udp"
-      - "28016:28016/tcp"
-      - "28017:28017/udp"
-      - "28082:28082/tcp"
+    # Portas: configure na aba Ports do Easypanel (nao aqui — evita conflito)
     volumes:
       - rust_data:/home/steam/rust
     environment:
