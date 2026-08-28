@@ -7,6 +7,13 @@ OVERLAY="/home/steam/overlay"
 IDENTITY="${SERVER_IDENTITY:-rst}"
 SERVER_DIR="${RUST_HOME}/server/${IDENTITY}"
 
+# Volume Docker costuma ser criado como root — corrige antes de continuar
+if [ "$(id -u)" = "0" ]; then
+  mkdir -p "${RUST_HOME}/server" "${SERVER_DIR}/cfg"
+  chown -R steam:steam /home/steam
+  exec gosu steam "$0" "$@"
+fi
+
 mkdir -p "${RUST_HOME}" "${SERVER_DIR}/cfg"
 
 echo "[rust-bs] Atualizando Rust Dedicated Server..."

@@ -7,6 +7,7 @@ RUN dpkg --add-architecture i386 \
     curl \
     tar \
     unzip \
+    gosu \
     lib32gcc-s1 \
     libsdl2-2.0-0 \
   && rm -rf /var/lib/apt/lists/*
@@ -25,7 +26,7 @@ COPY --chown=steam:steam server/rst/cfg/ /home/steam/overlay/server/rst/cfg/
 
 RUN chmod +x /home/steam/entrypoint.sh
 
-USER steam
+# Entrypoint roda como root para ajustar permissoes do volume, depois troca para steam
 
 ENV RUST_HOME=/home/steam/rust \
     STEAMCMD=/home/steam/steamcmd/steamcmd.sh \
