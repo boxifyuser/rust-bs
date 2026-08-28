@@ -16,8 +16,13 @@ fi
 
 mkdir -p "${RUST_HOME}" "${SERVER_DIR}/cfg"
 
-echo "[rust-bs] Atualizando Rust Dedicated Server..."
-"${STEAMCMD}" +force_install_dir "${RUST_HOME}" +login anonymous +app_update 258550 validate +quit
+if [ -f "${RUST_HOME}/RustDedicated" ]; then
+  echo "[rust-bs] Verificando atualizacoes do Rust..."
+  "${STEAMCMD}" +force_install_dir "${RUST_HOME}" +login anonymous +app_update 258550 +quit
+else
+  echo "[rust-bs] Instalacao inicial do Rust Dedicated Server (pode demorar)..."
+  "${STEAMCMD}" +force_install_dir "${RUST_HOME}" +login anonymous +app_update 258550 validate +quit
+fi
 
 if [ ! -f "${RUST_HOME}/RustDedicated" ]; then
   echo "[rust-bs] ERRO: RustDedicated nao encontrado apos instalacao."
@@ -48,7 +53,7 @@ fi
 
 export DOORSTOP_ENABLED=1
 export DOORSTOP_TARGET_ASSEMBLY="${RUST_HOME}/carbon/managed/Carbon.Preloader.dll"
-export LD_LIBRARY_PATH="${RUST_HOME}/RustDedicated_Data/Plugins/x86_64:${LD_LIBRARY_PATH:-}"
+export LD_LIBRARY_PATH="${RUST_HOME}/RustDedicated_Data/Plugins/x86_64:${RUST_HOME}:${LD_LIBRARY_PATH:-}"
 export LD_PRELOAD="${RUST_HOME}/libdoorstop.so"
 
 RCON_PASSWORD="${RCON_PASSWORD:?Defina RCON_PASSWORD}"
@@ -64,13 +69,15 @@ APP_PORT="${APP_PORT:-28082}"
 cd "${RUST_HOME}"
 
 echo "[rust-bs] Iniciando servidor..."
-exec ./RustDedicated -batchmode -nographics -silent-crashes \
+exec ./RustDedicated -batchmode -nographics -load -silent-crashes \
+  -logfile /dev/stdout \
   +server.ip 0.0.0.0 \
   +server.port "${SERVER_PORT}" \
   +server.queryport "${QUERY_PORT}" \
   +rcon.ip 0.0.0.0 \
   +rcon.port "${RCON_PORT}" \
   +rcon.password "${RCON_PASSWORD}" \
+  +rcon.web 1 \
   +app.port "${APP_PORT}" \
   +server.identity "${IDENTITY}" \
   +server.gamemode Vanilla \
@@ -80,5 +87,4 @@ exec ./RustDedicated -batchmode -nographics -silent-crashes \
   +server.maxplayers "${MAX_PLAYERS}" \
   +server.hostname "${SERVER_HOSTNAME}" \
   +bradley.enabled 0 \
-  +events.set_event_enabled bradley_road false \
-  -logfile "${SERVER_DIR}/server.log"
+  +events.set_event_enabled bradley_road false

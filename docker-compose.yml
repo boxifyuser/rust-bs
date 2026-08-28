@@ -12,7 +12,7 @@ services:
       - "28017/udp"
       - "28082/tcp"
     volumes:
-      - rust_data:/home/steam/rust/server
+      - rust_data:/home/steam/rust
     environment:
       - RCON_PASSWORD
       - SERVER_HOSTNAME
