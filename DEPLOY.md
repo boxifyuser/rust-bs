@@ -63,6 +63,8 @@ Recomendado para servidores de jogo com várias portas e volume persistente.
 
 > **Importante:** o Easypanel **não** lê `.env.local` nem arquivos `.env` do seu PC.
 > As variáveis precisam estar na aba **Environment** do serviço no painel.
+> Ative **"Criar arquivo .env"** e cole as variáveis no formato `CHAVE=valor` (sem aspas).
+> O `docker-compose.yml` lê esse `.env` automaticamente.
 > `RCON_PASSWORD` é **obrigatória** — sem ela o deploy avisa e o servidor não inicia.
 
 5. **Deploy**
