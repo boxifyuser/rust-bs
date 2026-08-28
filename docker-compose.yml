@@ -1,0 +1,29 @@
+services:
+  rust-bs:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    ports:
+      - "28015:28015/tcp"
+      - "28015:28015/udp"
+      - "28016:28016/tcp"
+      - "28017:28017/udp"
+      - "28082:28082/tcp"
+    volumes:
+      - rust_data:/home/steam/rust/server
+    environment:
+      RCON_PASSWORD: ${RCON_PASSWORD}
+      SERVER_HOSTNAME: ${SERVER_HOSTNAME:-BICHO SOLTO BRASIL | SOLO}
+      SERVER_SEED: ${SERVER_SEED:-836891193}
+      WORLD_SIZE: ${WORLD_SIZE:-1800}
+      MAX_PLAYERS: ${MAX_PLAYERS:-200}
+      SERVER_PORT: ${SERVER_PORT:-28015}
+      RCON_PORT: ${RCON_PORT:-28016}
+      QUERY_PORT: ${QUERY_PORT:-28017}
+      APP_PORT: ${APP_PORT:-28082}
+      SERVER_IDENTITY: ${SERVER_IDENTITY:-rst}
+      RUST_CARBON_ENABLED: ${RUST_CARBON_ENABLED:-1}
+
+volumes:
+  rust_data:

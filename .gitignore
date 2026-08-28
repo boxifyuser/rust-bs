@@ -33,7 +33,10 @@ carbon/logs/
 carbon/data/
 carbon/modules/**/data.db
 carbon/modules/**/data.json
+# Arquivos locais com segredos
+.env
 carbon/config.webpanel.json
+
 
 # Mapas e assets grandes
 map/

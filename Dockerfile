@@ -1,0 +1,39 @@
+FROM debian:bookworm-slim
+
+RUN dpkg --add-architecture i386 \
+  && apt-get update \
+  && apt-get install -y --no-install-recommends \
+    ca-certificates \
+    curl \
+    tar \
+    unzip \
+    lib32gcc-s1 \
+    libsdl2-2.0-0 \
+  && rm -rf /var/lib/apt/lists/*
+
+RUN useradd -m -u 1000 steam
+
+WORKDIR /home/steam
+
+RUN mkdir -p /home/steam/steamcmd \
+  && curl -fsSL "https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz" \
+    | tar -xzf - -C /home/steam/steamcmd
+
+COPY --chown=steam:steam docker/entrypoint.sh /home/steam/entrypoint.sh
+COPY --chown=steam:steam carbon/ /home/steam/overlay/carbon/
+COPY --chown=steam:steam server/rst/cfg/ /home/steam/overlay/server/rst/cfg/
+
+RUN chmod +x /home/steam/entrypoint.sh
+
+USER steam
+
+ENV RUST_HOME=/home/steam/rust \
+    STEAMCMD=/home/steam/steamcmd/steamcmd.sh \
+    SERVER_IDENTITY=rst \
+    RUST_CARBON_ENABLED=1
+
+EXPOSE 28015/tcp 28015/udp 28016/tcp 28017/udp 28082/tcp
+
+VOLUME ["/home/steam/rust/server"]
+
+ENTRYPOINT ["/home/steam/entrypoint.sh"]
