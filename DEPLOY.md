@@ -61,9 +61,10 @@ Recomendado para servidores de jogo com várias portas e volume persistente.
 | `SERVER_PUBLIC_IP` | `168.231.91.245` |
 | `STEAM_GSLT` | token gerado na Steam (veja secao abaixo) |
 
-> **Importante:** o Easypanel **não** lê `.env.local` nem arquivos `.env` do seu PC.
-> As variáveis precisam estar na aba **Environment** do serviço no painel (formato `CHAVE=valor`, uma por linha).
-> Clique em **Salvar** antes de **Implantar**. Não é necessário ativar "Criar arquivo .env".
+> **Importante:** o Easypanel **não** lê `.env.local` do seu PC.
+> Na aba **Environment**, adicione **cada variável separadamente** (campo Key + Value), não só um bloco de texto.
+> Exemplo: Key `RCON_PASSWORD` → Value `sua-senha`. Repita para `STEAM_GSLT`, `SERVER_PUBLIC_IP`, etc.
+> Clique em **Salvar** antes de **Implantar**.
 > `RCON_PASSWORD` é **obrigatória** — sem ela o deploy avisa e o servidor não inicia.
 
 5. **Deploy**
